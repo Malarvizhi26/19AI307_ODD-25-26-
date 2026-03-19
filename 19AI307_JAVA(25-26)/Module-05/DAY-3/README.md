@@ -1,22 +1,21 @@
-# Ex.No:5(A) INPUT STREAM READER 
-
+# Ex.No:5(C)  FILE HANDLING USING JAVA
 ## QUESTION:
-Write a Java program to write characters to a file using FileWriter.
+Write a program to count the number of characters in a file.
 
 ## AIM:
-To write character data into a file using the FileWriter class in Java.
+To count and display the total number of characters in a file using FileReader.
 
 ## ALGORITHM :
-1.	Import java.io.FileWriter and java.io.IOException.
-2.	Take user input using Scanner.
-3.	Create a FileWriter object with the desired file name.
-4.	Use write() method to write text into the file.
-5.	Close the FileWriter and handle exceptions using try-catch.
+1.	Ask the user for the file name.
+2.	Open the file using FileReader.
+3.	Read each character one by one until the end of the file.
+4.	Increment a counter for each character read.
+5.	Display the total character count.
 
 ## PROGRAM:
  ```
 /*
-Program to implement a InputStreamReader using Java
+Program to implement a File Handling using Java
 Developed by: MALARVIZHI G
 RegisterNumber: 212222040096
 */
@@ -26,23 +25,41 @@ RegisterNumber: 212222040096
 ```
 import java.io.*;
 
-public class FileWriteExample {
+public class FileCharacterCount {
     public static void main(String[] args) {
         try {
+            // Use BufferedReader to read input
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-            String filename = br.readLine();
-            String content = br.readLine();
 
-            FileWriter fw = new FileWriter(filename);
-            fw.write(content);
-            fw.close();
+            // Read the text to write (assume file name is fixed)
+            String text = br.readLine();
 
-            System.out.println("File written successfully.");
+            // Use a fixed file name
+            String fileName = "output.txt";
+
+            // Write text to file
+            try (FileWriter fw = new FileWriter(fileName)) {
+                if (text != null) {
+                    fw.write(text);
+                }
+            }
+
+            // Count characters in file
+            int charCount = 0;
+            try (FileReader fr = new FileReader(fileName)) {
+                while (fr.read() != -1) {
+                    charCount++;
+                }
+            }
+
+            System.out.println("Number of characters written to the file: " + charCount);
+
         } catch (IOException e) {
-            System.out.println("An error occurred.");
+            System.out.println("Error: " + e.getMessage());
         }
     }
 }
+
 ```
 
 
@@ -51,11 +68,12 @@ public class FileWriteExample {
 
 
 ## OUTPUT:
-<img width="1239" height="395" alt="image" src="https://github.com/user-attachments/assets/f1eb5219-05ab-4882-990c-ab044ebd6ca8" />
+<img width="1271" height="303" alt="image" src="https://github.com/user-attachments/assets/8417184e-b934-4c43-a19c-4bc7cec02f4e" />
+
+
 
 ## RESULT:
-The program successfully writes the entered text into output.txt using FileWriter.
-
+The program successfully reads the file and prints the total number of characters present in it.
 
 
 
